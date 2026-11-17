@@ -25,13 +25,18 @@ org:
   primary-color: "004d80"   # hex, without "#"
   accent-color: "d07a02"   # hex, without "#"
 license:
-  text: "CC BY-NC-SA 4.0"
+  text: "CC BY-NC-SA 4.0"          # remove to hide the licence text
   logo: "assets/logos/by-nc-sa.png"
+  show-logo: false                 # true = show the CC badge (PDF cover + HTML footer)
 
 crossref:
   fig-prefix: Figure
   tbl-prefix: Table
   eq-prefix: Equation
+
+# Mermaid diagrams: PDF rendering needs Chrome/Edge or `quarto install chromium`
+mermaid:
+  theme: neutral
 
 execute:
   echo: false
@@ -47,7 +52,7 @@ format:
     toc-title: Contents
     toc-depth: 3
     section-numbering: "1.1.1"
-    fontsize: 10.5pt
+    fontsize: 11pt
     linestretch: 1.0
     font-paths:
       - assets/fonts
@@ -61,6 +66,8 @@ format:
       - typst/typst-template.typ
       - typst/typst-show.typ
     fig-format: svg
+    mermaid-format: png       # Typst cannot draw Mermaid's SVG text; PNG is rendered via Chrome
+    fig-dpi: 300
   html:
     output-file: research-report.html
     theme: cosmo
@@ -76,5 +83,7 @@ format:
     code-tools: true
     embed-resources: true
     fig-format: svg
+    mermaid:
+      theme: neutral
     anchor-sections: true
     smooth-scroll: true

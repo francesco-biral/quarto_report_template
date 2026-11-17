@@ -43,6 +43,8 @@ Edit the metadata at the top of `report.qmd`, keep the Introduction, Conclusions
 
 {{< include sections/_discussion.qmd >}}
 
+{{< include sections/_workplan.qmd >}}
+
 # Conclusions
 
 The template provides a single source for a formal Typst PDF and a navigable HTML companion. Mathematical expressions, citations, callouts, tables, and computational results remain consistent across both formats. Python source is hidden by default, while selected cells can explicitly override that behavior when a collaborator needs to inspect the implementation.

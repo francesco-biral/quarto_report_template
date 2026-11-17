@@ -80,9 +80,10 @@ org:
 license:
   text: "CC BY-NC-SA 4.0"
   logo: "assets/logos/by-nc-sa.png"
+  show-logo: false          # true = show the CC badge
 ```
 
-Every field is optional; remove one and it disappears from the cover and footer. The colours apply to PDF headings and rules, the HTML palette and the plots (through `brand.py`).
+The CC badge is off by default: set `license.show-logo: true` to show it on the PDF cover and in the HTML footer (use another badge by changing `logo`). Every field is optional; remove one and it disappears from the cover and footer. The colours apply to PDF headings and rules, the HTML palette and the plots (through `brand.py`).
 
 Two rules:
 
@@ -109,7 +110,7 @@ You can keep several profiles (e.g. one per institution or project) and switch w
 | `headingfont` | Montserrat | Headings, cover, header/footer (matches the HTML) |
 | `codefont` | Roboto Mono | |
 | `mathfont` | New Computer Modern Math | Bundled with Typst |
-| `fontsize` | 10.5pt | All spacing scales with it |
+| `fontsize` | 11pt | All spacing scales with it |
 | `linestretch` | 1.0 | Multiplies line spacing |
 | `toc`, `toc-depth` | true, 3 | |
 | `section-numbering` | 1.1.1 | |
@@ -126,6 +127,19 @@ Vertical spacing is set in one place: the `rhythm` dictionary at the top of `typ
 - **Equations:** add `{#eq-name}` after `$$ … $$`, cite as `@eq-name`.
 - **Citations:** add entries to `references.bib`, cite as `@key`.
 - **Callouts:** `.callout-note`, `.callout-tip`, `.callout-warning`, `.callout-important`.
+- **Diagrams and Gantt charts (Mermaid):** see `sections/_workplan.qmd`.
+
+  ````markdown
+  ```{mermaid}
+  %%| label: fig-flow
+  %%| fig-cap: "My workflow."
+  %%| fig-width: 6
+  flowchart LR
+    A --> B --> C
+  ```
+  ````
+
+  Cite as `@fig-flow`. In the PDF, Mermaid is rendered to a 300-dpi PNG with a headless browser: install Chrome/Edge or run `quarto install chromium` once. Mermaid Gantt charts work well up to ~15 tasks; for large schedules, draw the chart in Python (matplotlib) using `brand.py` colours.
 - **Page break:** `{{< pagebreak >}}`.
 - **Unnumbered section:** `# Title {.unnumbered .unlisted}`.
 
@@ -143,7 +157,13 @@ b = brand()   # b["primary"], b["accent"], b["ink"], b["muted"], b["line"]
 
 For an R-first report, remove `jupyter: python3` from `report.qmd`, use `{r}` cells and install `knitr`. Mixing R and Python cells in one document needs `knitr` + `reticulate`.
 
-## 7. Fonts and licences
+## 7. Troubleshooting
+
+- **Render hangs after the code cells finish:** Quarto is starting a headless browser to render the Mermaid diagrams for the PDF. Stop with Ctrl+C, then run `quarto install chrome-headless-shell` (Quarto ≥ 1.8) or `quarto install chromium`. Alternatively, point to your own browser: `export QUARTO_CHROMIUM="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"`. Run `quarto render --log-level debug` to see where it stops.
+- **`color string contains non-hexadecimal letters`:** write colours in YAML without `#` (e.g. `"004d80"`).
+- **Logo not found / odd path errors:** avoid underscores in logo filenames.
+
+## 8. Fonts and licences
 
 - Template code — MIT License (`LICENSE`).
 - Source Serif 4 — Adobe, SIL Open Font License 1.1 (`assets/fonts/SourceSerif4-LICENSE.md`)

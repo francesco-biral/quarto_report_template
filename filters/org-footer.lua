@@ -42,7 +42,7 @@ function Pandoc(doc)
   if #lines > 0 then table.insert(left, '<div class="org-text">' .. table.concat(lines, "<br>") .. "</div>") end
 
   local right = {}
-  if str(lic.logo) then table.insert(right, '<img class="license-logo" src="' .. esc(str(lic.logo)) .. '" alt="">') end
+  if lic["show-logo"] == true and str(lic.logo) then table.insert(right, '<img class="license-logo" src="' .. esc(str(lic.logo)) .. '" alt="">') end
   if str(lic.text) then table.insert(right, "<div>" .. esc(str(lic.text)) .. "</div>") end
 
   if #left + #right == 0 then return doc end

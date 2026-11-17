@@ -16,11 +16,11 @@
 #let rhythm = (
   par: 0.85em,        // gap between paragraphs
   block: 1.1em,       // gap around figures, tables, code, callouts
-  h1-above: 2.4em,
+  h1-above: 2.0em,
   h1-below: 1.0em,
-  h2-above: 1.8em,
+  h2-above: 1.5em,
   h2-below: 0.75em,
-  h3-above: 1.4em,
+  h3-above: 1.2em,
   h3-below: 0.6em,
 )
 
@@ -54,7 +54,7 @@
   headingfont: ("Montserrat",),
   codefont: ("Roboto Mono",),
   mathfont: ("New Computer Modern Math",),
-  fontsize: 10.5pt,
+  fontsize: 11pt,
   linestretch: 1.0,
   sectionnumbering: "1.1.1",
   toc: true,
@@ -94,7 +94,9 @@
   set enum(indent: 0.6em, body-indent: 0.5em, spacing: 0.55em)
   set bibliography(title: [References])
 
-  // ---- Headings: sans-serif, sized on a 1.2 modular scale --------------------
+  // ---- Headings: sans-serif. Sizes are absolute (fontsize × factor) because
+// Typst's built-in heading rule already scales text and relative `em`
+// values would compound with it. -------------------------------------------
   set heading(numbering: sectionnumbering)
   show heading: set text(font: headingfont, fill: primary-dark, weight: 600, hyphenate: false)
   show heading: set par(justify: false)
@@ -102,7 +104,7 @@
   show heading.where(level: 1): it => {
     set block(above: rhythm.h1-above, below: rhythm.h1-below, sticky: true)
     block(width: 100%)[
-      #set text(size: 1.55em)
+      #set text(size: fontsize * 1.30)
       #if it.numbering != none and it.outlined {
         counter(heading).display(it.numbering)
         h(0.6em)
@@ -113,11 +115,11 @@
     ]
   }
   show heading.where(level: 2): set block(above: rhythm.h2-above, below: rhythm.h2-below, sticky: true)
-  show heading.where(level: 2): set text(size: 1.22em, fill: primary)
+  show heading.where(level: 2): set text(size: fontsize * 1.12, fill: primary)
   show heading.where(level: 3): set block(above: rhythm.h3-above, below: rhythm.h3-below, sticky: true)
-  show heading.where(level: 3): set text(size: 1.05em, fill: link-color)
+  show heading.where(level: 3): set text(size: fontsize, fill: link-color)
   show heading.where(level: 4): set block(above: rhythm.h3-above, below: rhythm.par, sticky: true)
-  show heading.where(level: 4): set text(size: 1em, style: "italic", weight: 500)
+  show heading.where(level: 4): set text(size: fontsize, style: "italic", weight: 500)
 
   show raw.where(block: true): it => block(
     width: 100%,

@@ -59,8 +59,10 @@ $endif$
 $if(license.text)$
   license: [$license.text$],
 $endif$
+$if(license.show-logo)$
 $if(license.logo)$
   license-logo: "$license.logo$",
+$endif$
 $endif$
 $if(abstract)$
   abstract: [$abstract$],
