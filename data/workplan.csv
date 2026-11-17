@@ -1,0 +1,10 @@
+wp,task,start,end,type
+WP1 Modelling,Literature review,2026-01,2026-02,done
+WP1 Modelling,Model development,2026-02,2026-05,
+WP1 Modelling,Model validation,2026-05,2026-07,
+WP2 Experiments,Test rig design,2026-02,2026-04,done
+WP2 Experiments,Test rig set-up,2026-04,2026-06,
+WP2 Experiments,Measurement campaign,2026-06,2026-10,
+WP3 Dissemination,Interim report (D3.1),2026-06,,milestone
+WP3 Dissemination,Conference paper,2026-09,2026-11,
+WP3 Dissemination,Final deliverable (D3.2),2026-12,,milestone

@@ -48,6 +48,8 @@ assets/css/report.css   HTML styling
 assets/fonts/           Bundled fonts (with licences)
 assets/logos/           Logos (only placeholder + licence badge are committed)
 code/python/brand.py    Gives plots the brand colours
+code/python/gantt.py    Gantt charts from a CSV work plan
+data/workplan.csv       Example work plan
 references.bib          Bibliography
 ```
 
@@ -127,7 +129,7 @@ Vertical spacing is set in one place: the `rhythm` dictionary at the top of `typ
 - **Equations:** add `{#eq-name}` after `$$ … $$`, cite as `@eq-name`.
 - **Citations:** add entries to `references.bib`, cite as `@key`.
 - **Callouts:** `.callout-note`, `.callout-tip`, `.callout-warning`, `.callout-important`.
-- **Diagrams and Gantt charts (Mermaid):** see `sections/_workplan.qmd`.
+- **Diagrams (Mermaid):** see `sections/_workplan.qmd`.
 
   ````markdown
   ```{mermaid}
@@ -139,7 +141,23 @@ Vertical spacing is set in one place: the `rhythm` dictionary at the top of `typ
   ```
   ````
 
-  Cite as `@fig-flow`. In the PDF, Mermaid is rendered to a 300-dpi PNG with a headless browser: install Chrome/Edge or run `quarto install chromium` once. Mermaid Gantt charts work well up to ~15 tasks; for large schedules, draw the chart in Python (matplotlib) using `brand.py` colours.
+  Cite as `@fig-flow`. In the PDF, Mermaid is rendered to a 300-dpi PNG with a headless browser: install Chrome/Edge or run `quarto install chromium` once. For Gantt charts use the CSV helper below instead (no browser needed).
+- **Gantt charts (work plans):** list tasks in a CSV and draw them with `code/python/gantt.py`:
+
+  ```csv
+  wp,task,start,end,type
+  WP1 Modelling,Literature review,2026-01,2026-02,done
+  WP1 Modelling,Model development,2026-02,2026-05,
+  WP3 Dissemination,Interim report (D3.1),2026-06,,milestone
+  ```
+
+  ```python
+  import sys; sys.path.insert(0, "code/python")
+  from gantt import gantt
+  fig = gantt("data/workplan.csv", today="2026-11-17")
+  ```
+
+  Dates are `YYYY-MM` (a task runs from the start of its first month to the end of its last month; a month-only milestone falls at the end of that month) or `YYYY-MM-DD`. `type` is empty, `done` (faded) or `milestone` (diamond). Options: `scale="month" | "quarter" | "project"` (M1, M2, …; set `project_start="2026-01"` if different from the first task), `highlight="<wp name>"`, `today="YYYY-MM-DD"`, `width` (inches, default 6.3 = text width). Colours come from `org.primary-color` / `org.accent-color`. Example: `sections/_workplan.qmd`.
 - **Page break:** `{{< pagebreak >}}`.
 - **Unnumbered section:** `# Title {.unnumbered .unlisted}`.
 

@@ -22,22 +22,20 @@ flowchart LR
 
 ## Work plan
 
-@fig-gantt shows a simple project schedule. Mermaid Gantt charts suit plans with up to about fifteen tasks; for larger schedules, build the chart in Python so it can follow the report palette exactly.
+@fig-gantt shows the project schedule. It is drawn by `code/python/gantt.py` from the table in `data/workplan.csv`, so updating the plan means editing that file (also possible in a spreadsheet program). Work packages take shades of the primary colour, completed tasks are faded and milestones are shown as diamonds.
 
-```{mermaid}
-%%| label: fig-gantt
-%%| fig-cap: "Indicative project work plan."
-%%| fig-width: 6.5
-gantt
-  dateFormat  YYYY-MM-DD
-  axisFormat  %b %Y
-  section WP1 Modelling
-    Literature review       :done,   t1, 2026-01-01, 60d
-    Model development       :active, t2, after t1, 90d
-  section WP2 Experiments
-    Test rig set-up         :        t3, 2026-03-01, 75d
-    Measurement campaign    :        t4, after t3, 60d
-  section WP3 Reporting
-    Interim report          :milestone, m1, 2026-06-30, 0d
-    Final deliverable       :        t5, after t4, 45d
+```{python}
+#| label: fig-gantt
+#| fig-cap: "Project work plan. The dashed line marks the reporting date."
+#| fig-alt: "Gantt chart of three work packages over 2026 with tasks, two milestones and a line marking the reporting date."
+import sys
+import matplotlib.pyplot as plt
+
+sys.path.insert(0, "code/python")
+from gantt import gantt
+
+fig = gantt("data/workplan.csv", today="2026-11-17")
+plt.show()
 ```
+
+Other layouts: `scale="quarter"` for long projects, `scale="project"` for project months (M1, M2, ...), and `highlight="WP2 Experiments"` to emphasise one work package.
