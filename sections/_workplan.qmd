@@ -1,0 +1,43 @@
+# Workflow and work plan
+
+Mermaid diagrams are written as text in `{mermaid}` cells, so they can be versioned and reviewed like the rest of the report. Cell options use the `%%|` prefix, and a `fig-` label makes them cross-referenceable.
+
+## Analysis workflow
+
+@fig-workflow summarises the reporting pipeline used in this template.
+
+```{mermaid}
+%%| label: fig-workflow
+%%| fig-cap: "Analysis and reporting workflow."
+%%| fig-width: 6.2
+flowchart LR
+  A[Raw data] --> B[Processing<br/>Python / R]
+  B --> C{Validated?}
+  C -- yes --> D[Figures and tables]
+  C -- no --> B
+  D --> E[Quarto report]
+  E --> F[PDF via Typst]
+  E --> G[HTML]
+```
+
+## Work plan
+
+@fig-gantt shows a simple project schedule. Mermaid Gantt charts suit plans with up to about fifteen tasks; for larger schedules, build the chart in Python so it can follow the report palette exactly.
+
+```{mermaid}
+%%| label: fig-gantt
+%%| fig-cap: "Indicative project work plan."
+%%| fig-width: 6.5
+gantt
+  dateFormat  YYYY-MM-DD
+  axisFormat  %b %Y
+  section WP1 Modelling
+    Literature review       :done,   t1, 2026-01-01, 60d
+    Model development       :active, t2, after t1, 90d
+  section WP2 Experiments
+    Test rig set-up         :        t3, 2026-03-01, 75d
+    Measurement campaign    :        t4, after t3, 60d
+  section WP3 Reporting
+    Interim report          :milestone, m1, 2026-06-30, 0d
+    Final deliverable       :        t5, after t4, 45d
+```
