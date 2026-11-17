@@ -1,0 +1,15 @@
+# Discussion
+
+The example demonstrates a useful division of responsibilities. The main document owns metadata and the report-wide narrative, while included files encapsulate technical sections. Contributors can therefore edit Methods, Results, or Discussion with fewer merge conflicts.
+
+## Reproducibility and code visibility
+
+The project-level default is `echo: false`: executable code runs, but source is omitted from both PDF and HTML. This is appropriate for a reader-facing deliverable. For methods that require auditability, add `#| echo: true` to an individual cell. The HTML output presents such code in a foldable panel, whereas the static PDF prints the selected source normally.
+
+::: {.callout-note title="Optional R workflow"}
+This report is Python-first and uses the Jupyter engine. For an R-first report, remove `jupyter: python3`, use `{r}` cells, and render with a working `knitr` installation. A minimal example is provided in `code/r/example-analysis.R`. Mixed R and Python execution is possible through `knitr` and `reticulate`, but collaborators should agree on one engine before combining executable section files.
+:::
+
+## Extending the report
+
+Additional section files can be created under `sections/`, for example `_data.qmd`, `_validation.qmd`, or `_appendix.qmd`, then included from `report.qmd`. Included files should not contain their own YAML metadata. Figures, equations, tables, and citations can be cross-referenced across section boundaries because Quarto assembles them into one document before rendering [@quarto2026].

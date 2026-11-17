@@ -1,0 +1,80 @@
+project:
+  type: default
+  output-dir: output
+  render:
+    - report.qmd
+
+lang: en
+bibliography: references.bib
+link-citations: true
+number-sections: true
+number-depth: 3
+# ---------------------------------------------------------------------------
+# Organisation / branding — neutral defaults for the public template.
+# Your institution's values live in a private profile (e.g. _quarto-unitn.yml,
+# git-ignored) and are activated with:  quarto render --profile unitn
+# ---------------------------------------------------------------------------
+org:
+  name: "Organisation Name"
+  unit: "Department / Research Group"
+  address: "Street, Postcode City, Country"
+  website: "https://example.org"
+  cover-logo: "assets/logos/placeholder-logo.svg"
+  cover-logo-width: 90mm
+  # header-logo: "assets/logos/placeholder-logo.svg"
+  primary-color: "004d80"   # hex, without "#"
+  accent-color: "d07a02"   # hex, without "#"
+license:
+  text: "CC BY-NC-SA 4.0"
+  logo: "assets/logos/by-nc-sa.png"
+
+crossref:
+  fig-prefix: Figure
+  tbl-prefix: Table
+  eq-prefix: Equation
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: false
+
+format:
+  typst:
+    output-file: research-report.pdf
+    papersize: a4
+    toc: true
+    toc-title: Contents
+    toc-depth: 3
+    section-numbering: "1.1.1"
+    fontsize: 10.5pt
+    linestretch: 1.0
+    font-paths:
+      - assets/fonts
+    mainfont: Source Serif 4      # body: serif, optimised for reading
+    headingfont: Montserrat       # headings/cover: matches the HTML identity
+    codefont: Roboto Mono
+    mathfont: New Computer Modern Math
+    linkcolor: "#0076ba"
+    citecolor: "#0076ba"
+    template-partials:
+      - typst/typst-template.typ
+      - typst/typst-show.typ
+    fig-format: svg
+  html:
+    output-file: research-report.html
+    theme: cosmo
+    css: assets/css/report.css
+    filters:
+      - filters/org-footer.lua
+    html-math-method: katex
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    code-fold: true
+    code-summary: "Show code"
+    code-tools: true
+    embed-resources: true
+    fig-format: svg
+    anchor-sections: true
+    smooth-scroll: true

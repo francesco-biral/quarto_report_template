@@ -1,0 +1,57 @@
+---
+title: "Dynamics of a Damped Research System"
+subtitle: "A worked example for collaborative technical reporting"
+author:
+  - name: "First Author"
+    affiliations:
+      - name: "Example Research Institute"
+    email: "first.author@example.org"
+  - name: "Second Author"
+    affiliations:
+      - name: "Collaborating Research Institution"
+    email: "second.author@example.org"
+document-type: "Research report"
+version: "1.0"
+date: "2026-11-13"
+keywords:
+  - reproducible research
+  - Quarto
+  - Typst
+abstract: |
+  This document is both a report template and a compact worked example. It
+  demonstrates the expected structure of a collaborative research deliverable,
+  including mathematical notation, numbered cross-references, executable Python,
+  a generated figure, a table, citations, and callout blocks. The default output
+  suppresses computational source code while retaining results; the HTML version
+  can expose selected code in foldable panels when transparency is useful.
+jupyter: python3
+---
+
+# Introduction
+
+Reproducible reports should connect assumptions, analysis, evidence, and interpretation without forcing readers to reconstruct the workflow. This template uses Quarto for authoring and computation, Typst for the formal PDF, and an optional HTML output for interactive reading. Its modular structure is intended for research collaborations in which different contributors own different sections.
+
+The worked example studies a damped oscillator. It is deliberately small, but it illustrates the same mechanisms used in larger research reports: mathematical definitions, executable analysis, cross-referenced figures and tables, and bibliographic citations. The visualisation follows the principle that graphics should make structure in data easier to inspect [@wickham2016].
+
+::: {.callout-note title="How to use this template"}
+Edit the metadata at the top of `report.qmd`, keep the Introduction, Conclusions, Acknowledgements, and references in this main file, and place project-specific middle sections in underscore-prefixed files under `sections/`.
+:::
+
+{{< include sections/_methods.qmd >}}
+
+{{< include sections/_results.qmd >}}
+
+{{< include sections/_discussion.qmd >}}
+
+# Conclusions
+
+The template provides a single source for a formal Typst PDF and a navigable HTML companion. Mathematical expressions, citations, callouts, tables, and computational results remain consistent across both formats. Python source is hidden by default, while selected cells can explicitly override that behavior when a collaborator needs to inspect the implementation.
+
+# Acknowledgements {.unnumbered .unlisted}
+
+This optional section can acknowledge funding, facilities, datasets, or individual contributions. Delete the heading and text when acknowledgements are not required.
+
+::: {.callout-important title="Before publishing"}
+Replace the example authors, affiliations, abstract, analysis, bibliography entries, and acknowledgements. Confirm the document type, version, and date on the cover.
+:::
+

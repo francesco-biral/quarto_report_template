@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="80" viewBox="0 0 360 80">
+  <rect x="2" y="2" width="76" height="76" rx="10" fill="none" stroke="#004d80" stroke-width="4"/>
+  <path d="M20 58 L40 22 L60 58 Z" fill="#d07a02"/>
+  <text x="96" y="38" font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#003462">Organisation</text>
+  <text x="96" y="64" font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="18" fill="#647381">Department / Group</text>
+</svg>

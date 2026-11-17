@@ -1,0 +1,21 @@
+.DS_Store
+/.quarto/
+/.jupyter_cache/
+/.cache/
+/output/*
+!/output/.gitkeep
+/tmp/
+*_files/
+**/*.quarto_ipynb
+
+# Generated Typst intermediates in the project root only.
+# (A bare `*.typ` would also ignore typst/typst-template.typ!)
+/*.typ
+
+# ---- Private institutional branding (keep out of the public repo) ----
+_quarto-*.yml
+_quarto-*.yaml
+!_quarto-example.yml
+assets/logos/*
+!assets/logos/placeholder-logo.svg
+!assets/logos/by-nc-sa.png

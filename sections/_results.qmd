@@ -1,0 +1,67 @@
+{{< pagebreak >}}
+
+# Results
+
+## Executable visualisation
+
+The following Python cell evaluates @eq-response and creates @fig-damped-response. Its code is not displayed because `echo: false` is the project default; only the generated figure appears in the report.
+
+```{python}
+#| label: fig-damped-response
+#| fig-cap: "Damped displacement response and exponential amplitude envelope."
+#| fig-alt: "A decaying oscillatory displacement curve bounded by a dashed exponential envelope."
+#| echo: false
+#| fig-width: 7.2
+#| fig-height: 4.2
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+
+sys.path.insert(0, "code/python")
+from brand import brand  # colours from org.primary-color / org.accent-color
+
+m, c, k, x0 = 1.0, 0.8, 20.0, 0.10
+omega_n = np.sqrt(k / m)
+zeta = c / (2 * np.sqrt(k * m))
+omega_d = omega_n * np.sqrt(1 - zeta**2)
+
+t = np.linspace(0, 8, 800)
+envelope = x0 * np.exp(-zeta * omega_n * t)
+x = envelope * (
+    np.cos(omega_d * t)
+    + (zeta * omega_n / omega_d) * np.sin(omega_d * t)
+)
+
+b = brand()
+navy, orange, muted = b["primary"], b["accent"], b["muted"]
+plt.rcParams.update({
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Montserrat", "Helvetica Neue", "Arial"],
+    "axes.labelcolor": b["ink"],
+    "text.color": b["ink"],
+    "xtick.color": muted,
+    "ytick.color": muted,
+})
+
+fig, ax = plt.subplots(figsize=(7.2, 4.2), constrained_layout=True)
+ax.plot(t, x, color=navy, linewidth=2.4, label="Displacement")
+ax.plot(t, envelope, color=orange, linewidth=1.4, linestyle="--", label="Envelope")
+ax.plot(t, -envelope, color=orange, linewidth=1.4, linestyle="--")
+ax.axhline(0, color=b["line"], linewidth=1)
+ax.set(xlabel="Time (s)", ylabel="Displacement (m)")
+ax.grid(axis="x", color=b["line"], linewidth=0.7, alpha=0.65)
+ax.spines[["top", "right"]].set_visible(False)
+ax.spines[["left", "bottom"]].set_color("#d9e2e8")
+ax.legend(frameon=False, loc="upper right")
+plt.show()
+```
+
+The response remains within the analytical envelope and decays toward equilibrium. The first few extrema retain the oscillatory character of the underdamped model, while their magnitude decreases exponentially.
+
+::: {.callout-warning title="Interpretation boundary"}
+This example uses deterministic parameters and contains no measurement uncertainty. A real report should state uncertainty sources, validation data, and sensitivity assumptions before drawing engineering conclusions.
+:::
+
+## Summary indicators
+
+The damping ratio is below one, so the chosen system is underdamped. The corresponding natural and damped frequencies are close because the damping is modest. These values are computed from @eq-parameters rather than entered manually, reducing the risk of inconsistency between the text, table, and plot.

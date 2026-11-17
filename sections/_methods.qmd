@@ -1,0 +1,64 @@
+# Methods
+
+## Mathematical model
+
+Let $x(t)$ denote displacement, $m$ the mass, $c$ the damping coefficient, and $k$ the stiffness. The free response is governed by
+
+$$
+m\frac{\mathrm{d}^2x}{\mathrm{d}t^2}
++ c\frac{\mathrm{d}x}{\mathrm{d}t}
++ kx = 0.
+$$ {#eq-motion}
+
+For an underdamped system, define the natural frequency $\omega_n$, damping ratio $\zeta$, and damped frequency $\omega_d$ as
+
+$$
+\omega_n = \sqrt{\frac{k}{m}}, \qquad
+\zeta = \frac{c}{2\sqrt{k m}}, \qquad
+\omega_d = \omega_n\sqrt{1-\zeta^2}.
+$$ {#eq-parameters}
+
+With $x(0)=x_0$ and $\dot{x}(0)=0$, the response used in the example is
+
+$$
+x(t) = x_0 e^{-\zeta\omega_n t}
+\left[\cos(\omega_d t)
++ \frac{\zeta\omega_n}{\omega_d}\sin(\omega_d t)\right].
+$$ {#eq-response}
+
+@eq-response is evaluated numerically in the Results section.
+
+::: {.callout-tip title="Equation cross-references"}
+Add a label such as `{#eq-response}` after a display equation and refer to it with `@eq-response`. Quarto numbers and links it automatically.
+:::
+
+## Computational settings
+
+The parameters in @tbl-parameters define the demonstration case.
+
+| Parameter | Symbol | Value | Unit |
+|:--|:--:|--:|:--|
+| Mass | $m$ | 1.00 | kg |
+| Damping coefficient | $c$ | 0.80 | N s m$^{-1}$ |
+| Stiffness | $k$ | 20.00 | N m$^{-1}$ |
+| Initial displacement | $x_0$ | 0.10 | m |
+
+: Model parameters used in the executable example. {#tbl-parameters}
+
+The global execution settings hide source code, warnings, and messages. A cell can override the default with `#| echo: true`; in HTML, that source is then available in a folded panel.
+
+```{python}
+#| label: lst-derived-values
+#| echo: true
+#| output: true
+import numpy as np
+
+m, c, k, x0 = 1.0, 0.8, 20.0, 0.10
+omega_n = np.sqrt(k / m)
+zeta = c / (2 * np.sqrt(k * m))
+omega_d = omega_n * np.sqrt(1 - zeta**2)
+
+print(f"Natural frequency: {omega_n:.3f} rad/s")
+print(f"Damping ratio: {zeta:.3f}")
+print(f"Damped frequency: {omega_d:.3f} rad/s")
+```

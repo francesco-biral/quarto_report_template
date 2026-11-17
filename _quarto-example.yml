@@ -1,0 +1,14 @@
+# Example branding profile. Copy to _quarto-myorg.yml (git-ignored) and edit.
+# Activate with:   quarto render --profile myorg
+# or persistently: export QUARTO_PROFILE=myorg
+# Values here are merged over _quarto.yaml.
+
+org:
+  name: "My University"
+  unit: "My Department"
+  address: "Street 1, 00000 City, Country"
+  website: "https://example.org"
+  cover-logo: "assets/logos/my-logo.png"
+  cover-logo-width: 120mm
+  primary-color: "004d80"   # hex, without "#"
+  accent-color: "d07a02"   # hex, without "#"
